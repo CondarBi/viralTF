@@ -11,7 +11,7 @@
 	- Sexual orientation has a priority of 90 (as I want it to be displayed near the start).
 	- Most other standard status effects (such as pregnancy, well-rested, alcohol level, etc.) have a priority of 80.
 	- Set bonuses have a priority of 70. -->
-	<renderingPriority>70</renderingPriority>
+	<renderingPriority>75</renderingPriority>
 	
 	<!-- 'true' if you want this status effect to be displayed in the affected character's status effect panel. This should pretty much always be 'true'. -->
 	<renderInEffectsPanel>true</renderInEffectsPanel>
@@ -19,10 +19,10 @@
 	<!-- The category which this status effect falls into. You can omit this field if you want it to be set to DEFAULT (which is the standard category).
 	This particular category is set to INVENTORY, as set bonuses only need to be checked for after a character has had their inventory changed in some way.
 	Categories, along with their meanings, can be found here: https://github.com/Innoxia/liliths-throne-public/blob/dev/src/com/lilithsthrone/game/character/effects/StatusEffectCategory.java -->
-	<category>INVENTORY</category>
+	<category>DEFAULT</category>
 	
 	<!-- 'BENEFICIAL' if this is a good status effect for a character to have, 'NEUTRAL' if it's neither, or 'DETRIMENTAL' if it's a bad one. -->
-	<beneficial>BENEFICIAL</beneficial>
+	<beneficial>NEUTRAL</beneficial>
 	
 	<!-- 'true' if you want this status effect to be rendered during combat, and if the 'applyEffects' element should be applied to the affected character on every combat round during which it is active.
 	This should only be set to true if this a status effect which is applied and used *only* in combat.
@@ -30,7 +30,7 @@
 	<combatEffect>false</combatEffect>
 	
 	<!-- 'true' if you want this status effect to be rendered during sex. -->
-	<sexEffect>false</sexEffect>
+	<sexEffect>true</sexEffect>
 	
 	<!-- Tags which are applied to the affected character while this effect is active.
 	All tags can be found here: https://github.com/Innoxia/liliths-throne-public/blob/dev/src/com/lilithsthrone/game/inventory/ItemTag.java
@@ -44,16 +44,14 @@
 		PREVENTS_ERECTION_PHYSICAL
 		PREVENTS_ERECTION_OTHER
 	It is unlikely that additional tags will be supported in the future, but if any are added, this section will be updated. -->
-	<tags>
-		<tag>NIGHT_VISION_SELF</tag>
-	</tags>
+  <tags/>
 	
 	<!-- The name of this set bonus. The character under the effect is passed in as the 'npc' parsing argument, so if you want to, you can include parsing elements such as [npc.name]. -->
-	<name><![CDATA[Socks of Power]]></name>
+	<name><![CDATA[Femboy Virus]]></name>
 	
 	<!-- The description of this status effect. The character under the effect is passed in as the 'npc' parsing argument, so if you want to, you can include parsing elements such as [npc.name]. -->
 	<description><![CDATA[
-		By wearing the template socks, you become a sock god#IF(npc.isFeminine())dess#ENDIF!
+    npc.heSheHasFull() the Femboy Virus and will quickly npc.colorTfGeneric(transform into a femboy) and npc.glowTfGeneric(spread the virus to others through sexual contact.)
 	]]></description>
 	
 	<!-- The name of the icon which should be used to represent this status effect. The icon must be an svg file, and must be placed in the same folder as this XML file. -->
@@ -61,16 +59,14 @@
 	
 	<!-- The colour which should be associated with this status effect. Just like with clothing and weapon recolouring, this is used to recolour the image you used above.
 	A PresetColour value should be used here, drawn from: https://github.com/Innoxia/liliths-throne-public/blob/dev/src/com/lilithsthrone/utils/colours/PresetColour.java -->
-	<colourPrimary>CLOTHING_WHITE</colourPrimary> <!-- This has to have a value defined, or else this XML file will fail to load. -->
+	<colourPrimary>BASE_BLUE_LIGHT</colourPrimary> <!-- This has to have a value defined, or else this XML file will fail to load. -->
 	<colourSecondary/> <!-- This can optionally be left blank, like the 'colourTertiary' element below. -->
 	<colourTertiary/>
 	
 	<!-- The attributes which should be affected by having this status effect. The value="10" part defines how much the attribute should be numerically affected (and can be negative), while the 'DAMAGE_LUST' part defines which attribute is being affected.
 	You can define any number of attribute modifiers, but it's usually best to keep it limited to just a few.
 	Values for attributes should be drawn from here: https://github.com/Innoxia/liliths-throne-public/blob/dev/src/com/lilithsthrone/game/character/attributes/Attribute.java-->
-	<attributeModifiers>
-		<modifier value="100.0">HEALTH_MAXIMUM</modifier>
-	</attributeModifiers>
+  <attributeModifiers/>
 	
 	<!-- The CombatMoves which should be unlocked for the character affected by this status effect.
 	CombatMove identifiers are defined in their constructors. When modding support for combat moves is added, the identifier will be described in the modding file there.
@@ -110,13 +106,7 @@
 	To parse something and return a String, use a '#' character at the start of a command, such as: [#npc.isFeminine()]
 	To parse something without returning a String (which would most likely not be used in this element), use two '#' characters, such as: [##npc.isFeminine()]
 	As a final note, all whitespace is stripped from the returned String before it is parsed into a Boolean. -->
-	<applicationCondition><![CDATA[
-		#IF(SET_BONUS_innoxia_template.isCharacterWearingCompleteSet(npc))
-			true
-		#ELSE
-			false
-		#ENDIF
-	]]></applicationCondition>
+	<applicationCondition><![CDATA[false]]></applicationCondition>
 	<!--The above example is meant to show that you can use the parser to create more "complex" conditionals, but an alternate, simpler example to achieve the same effect would be to just do:
 	<applicationCondition shortConditionalCheck="true"><![CDATA[
 		SET_BONUS_innoxia_kitty.isCharacterWearingCompleteSet(npc)
