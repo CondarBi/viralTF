@@ -9,7 +9,7 @@
   <tags/>
   <name><![CDATA[Femboy Virus]]></name>
   <description><![CDATA[
-    npc.heSheHasFull() the Femboy Virus and will quickly npc.colorTfGeneric(transform into a femboy) and npc.glowTfGeneric(spread the virus to others through sexual contact.)
+    [npc.HeSheHasFull()] the Femboy Virus and will quickly [npc.colorTfGeneric(transform into a femboy)] and [npc.glowTfGeneric(spread the virus to others through sexual contact.)]
   ]]></description>
   <imageName>virus.svg</imageName>
   <colourPrimary>BASE_BLUE_LIGHT</colourPrimary>
@@ -24,7 +24,7 @@
   <applyEffect><![CDATA[
     #IF(game.isInSex() && npc == sex.getCharacterOrgasming() && sex.isReadyToOrgasm(npc))
       [## function infect(partner) {
-        partner.addStatusEffect(condarbi_virusFemboy, 3600);
+        partner.addStatusEffect(SE_condarbi_virusFemboy, 3600);
       }]
       [## function getPartners(characterMap) {
         characterMap.remove(npc);
