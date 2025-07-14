@@ -21,14 +21,18 @@
   <extraEffects/>
   <applicationCondition><![CDATA[false]]></applicationCondition>
   <applicationLength constantRefresh="false">-1</applicationLength>
-	<applyEffect interval="3600"><![CDATA[
-		#IF(SECONDS_PASSED>0)
-			An hour passed!
-			#IF(TOTAL_SECONDS_PASSED>(60*60*24))
-				[##game.getTextEndStringBuilder().append("<p>This effect has been in effect for more than a day!</p>")]
-			#ENDIF
-		#ENDIF
-	]]></applyEffect>
+  <applyEffect><![CDATA[
+    #IF(game.isInSex() && npc == sex.getCharacterOrgasming() && sex.isReadyToOrgasm(npc))
+      [## function infect(partner) {
+        partner.addStatusEffect(condarbi_virusFemboy, 3600);
+      }]
+      [## function getPartners(characterMap) {
+        characterMap.remove(npc);
+        characterMap.keySet().forEach(infect);
+      }]
+      [##sex.getOngoingActionsMap(npc).values().stream().forEach(getPartners)]
+    #ENDIF
+  ]]></applyEffect>
   <applyRemovalEffect/>
   <applyPostRemovalEffect/>
 </statusEffect>
