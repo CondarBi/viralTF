@@ -24,7 +24,7 @@
   <applyEffect><![CDATA[
     #IF(game.isInSex() && npc == sex.getCharacterOrgasming() && sex.isReadyToOrgasm(npc))
       [## function infect(partner) {
-        partner.addStatusEffect(SE_condarbi_virusFemboy, 3600);
+        partner.addStatusEffect(SE_condarbi_virusFemboy, (60 * 60 * 24));
       }]
       [## function getPartners(characterMap) {
         characterMap.remove(npc);
