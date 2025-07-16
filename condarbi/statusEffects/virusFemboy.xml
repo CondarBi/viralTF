@@ -24,7 +24,7 @@
   <applyEffect><![CDATA[
     #IF(game.isInSex() && npc == sex.getCharacterOrgasming() && sex.isReadyToOrgasm(npc))
       [## function infect(partner) {
-        partner.addStatusEffect(SE_condarbi_virusFemboy, (60 * 60 * 24));
+        partner.addStatusEffect(SE_condarbi_virusFemboy, 86400);
       }]
       [## function getPartners(characterMap) {
         characterMap.remove(npc);
@@ -34,5 +34,30 @@
     #ENDIF
   ]]></applyEffect>
   <applyRemovalEffect/>
-  <applyPostRemovalEffect/>
+  <applyPostRemovalEffect><![CDATA[
+    [## npc.addStatusEffect(SE_condarbi_virusFemboy, 86400)]
+    [## function transform(npc, stat, target, lowerBound, upperBound, desiredTime, onInfection) {
+      var output = "";
+      switch(stat.toLowerCase().replace(/_/g, "")) {
+        case 'asssize':
+          var statObj = {
+            get : function() {
+              return npc.getAssSize().getValue();
+            },
+            set : function(i) {
+              output += npc.setAssSize(i);
+            },
+            increment : function(i) {
+              output += npc.incrementAssSize(i);
+            },
+            max : 7,
+            min: 0
+          };
+          break;
+      }
+      statObj.increment(1);
+      return output;
+    }]
+    [# transform(npc, "assSize", 1, 2, 3, 4, 5)]
+  ]]></applyPostRemovalEffect>
 </statusEffect>
