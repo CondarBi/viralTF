@@ -204,21 +204,6 @@
                 min: 0
               };
               break;
-            case 'facialhair':
-              var statObj = {
-                get: function() {
-                  return npc.getFacialHair().getValue();
-                },
-                set: function(i) {
-                  output += npc.setFacialHair(i);
-                },
-                increment: function(i) {
-                  output += npc.incrementFacialHair(i);
-                },
-                max: 7,
-                min: 0
-              };
-              break;
             default:
               var statObj = {
                 get: function() {
@@ -328,7 +313,41 @@
                 min: 0
               };
               break;
-            case 'pubichair':
+          };
+          break;
+        case 'hair':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'head':
+              var statObj = {
+                get: function() {
+                  return npc.getHairRawLengthValue();
+                },
+                set: function(i) {
+                  output += npc.setHairLength(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementHairLength(i);
+                },
+                max: ,
+                min: 
+              };
+              break;
+            case 'facial':
+              var statObj = {
+                get: function() {
+                  return npc.getFacialHair().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFacialHair(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFacialHair(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'pubic':
               var statObj = {
                 get: function() {
                   return npc.getPubicHair().getValue();
@@ -338,6 +357,36 @@
                 },
                 increment: function(i) {
                   output += npc.incrementPubicHair(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'arm':
+              var statObj = {
+                get: function() {
+                  return npc.getUnderarmHair().getValue();
+                },
+                set: function(i) {
+                  output += npc.setUnderarmHair(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementUnderarmHair(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'ass':
+              var statObj = {
+                get: function() {
+                  return npc.getAssHair().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssHair(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssHair(i);
                 },
                 max: 7,
                 min: 0
