@@ -204,6 +204,21 @@
                 min: 0
               };
               break;
+            case 'facialhair':
+              var statObj = {
+                get: function() {
+                  return npc.getFacialHair().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFacialHair(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFacialHair(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
             default:
               var statObj = {
                 get: function() {
@@ -222,6 +237,112 @@
                 max: 1,
                 min: 0
               };
+          };
+          break;
+        case 'core':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'heightnormal':
+              var statObj = {
+                get: function() {
+                  if (!npc.isShortStature()) {
+                    return npc.getHeightValue();
+                  }
+                },
+                set: function(i) {
+                  if (!npc.isShortStature()) {
+                    output += npc.setHeight(i);
+                  }
+                },
+                increment: function(i) {
+                  if (!npc.isShortStature()) {
+                    output += npc.incrementHeight(i, false);
+                  }
+                },
+                max: 366,
+                min: 122
+              };
+              break;
+            case 'heightshort':
+              var statObj = {
+                get: function() {
+                  if (npc.isShortStature()) {
+                    return npc.getHeightValue();
+                  }
+                },
+                set: function(i) {
+                  if (npc.isShortStature()) {
+                    output += npc.setHeight(i);
+                  }
+                },
+                increment: function(i) {
+                  if (npc.isShortStature()) {
+                    output += npc.incrementHeight(i, false);
+                  }
+                },
+                max: 122,
+                min: 15
+              };
+              break;
+            case 'musclesize':
+              var statObj = {
+                get: function() {
+                  return npc.getMuscleValue();
+                },
+                set: function(i) {
+                  output += npc.setMuscle(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementMuscle(i);
+                },
+                max: 100,
+                min: 0
+              };
+              break;
+            case 'bodysize':
+              var statObj = {
+                get: function() {
+                  return npc.getBodySizeValue();
+                },
+                set: function(i) {
+                  output += npc.setBodySize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementBodySize(i);
+                },
+                max: 100,
+                min: 0
+              };
+              break;
+            case 'femininity':
+              var statObj = {
+                get: function() {
+                  return npc.getFemininityValue();
+                },
+                set: function(i) {
+                  output += npc.setFemininity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFemininity(i);
+                },
+                max: 100,
+                min: 0
+              };
+              break;
+            case 'pubichair':
+              var statObj = {
+                get: function() {
+                  return npc.getPubicHair().getValue();
+                },
+                set: function(i) {
+                  output += npc.setPubicHair(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementPubicHair(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
           };
           break;
         case 'ass':
