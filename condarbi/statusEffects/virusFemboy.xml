@@ -42,45 +42,60 @@
         switch(stat.toLowerCase().replace(/_/g, "")) {
           case 'corruption':
             var statObj = {
-              get : function() {
+              get: function() {
                 return Math.round(npc.getAttributeValue(ATTRIBUTE_MAJOR_CORRUPTION));
               },
-              set : function(i) {
+              set: function(i) {
                 output += npc.setAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
               },
-              increment : function(i) {
+              increment: function(i) {
                 output += npc.incrementAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
               },
               max: 100,
               min: 0
             };
             break;
+          case 'lipsize':
+            var statObj = {
+              get: function() {
+                return npc.getLipSizeValue();
+              },
+              set: function(i) {
+                output += npc.setLipSize(i);
+              },
+              increment: function(i) {
+                output += npc.incrementLipSize(i);
+              },
+              max: 7,
+              min: 0
+            };
+            break;
           case 'asssize':
             var statObj = {
-              get : function() {
+              get: function() {
                 return npc.getAssSize().getValue();
               },
-              set : function(i) {
+              set: function(i) {
                 output += npc.setAssSize(i);
               },
-              increment : function(i) {
+              increment: function(i) {
                 output += npc.incrementAssSize(i);
               },
-              max : 7,
+              max: 7,
               min: 0
             };
             break;
         }
       } else {
         var statObj = {
-          get : function() {
+          get: function() {
             if (npc.hasFetish(stat)) {
               return 5;
             } else {
               return npc.getFetishDesire(stat).getValue();
             }
           },
-          set : function(i) {
+          set: function(i) {
             switch(i) {
               case 5:
                 npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE);
@@ -103,7 +118,7 @@
                 break;
             }
           },
-          increment : function(i) {
+          increment: function(i) {
             this.set(this.get() + i);
           },
           max: 5,
