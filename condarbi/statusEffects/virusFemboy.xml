@@ -70,6 +70,96 @@
               min: 0
             };
             break;
+          case 'tonguelength':
+            var statObj = {
+              get: function() {
+                return npc.getTongueLengthValue();
+              },
+              set: function(i) {
+                output += npc.setTongueLength(i);
+              },
+              increment: function(i) {
+                output += npc.incrementTongueLength(i);
+              },
+              max: 60,
+              min: 0
+            };
+            break;
+          case 'mouthcapacity':
+            var statObj = {
+              get: function() {
+                return npc.getFaceRawCapacityValue();
+              },
+              set: function(i) {
+                output += npc.setFaceCapacity(i, false);
+              },
+              increment: function(i) {
+                output += npc.incrementFaceCapacity(i, false);
+              },
+              max: 25,
+              min: 0
+            };
+            break;
+          case 'mouthdepth':
+            var statObj = {
+              get: function() {
+                return npc.getFaceDepth().getValue();
+              },
+              set: function(i) {
+                output += npc.setFaceDepth(i);
+              },
+              increment: function(i) {
+                output += npc.incrementFaceDepth(i);
+              },
+              max: 7,
+              min: 0
+            };
+            break;
+          case 'mouthelasticity':
+            var statObj = {
+              get: function() {
+                return npc.getFaceElasticity().getValue();
+              },
+              set: function(i) {
+                output += npc.setFaceElasticity(i);
+              },
+              increment: function(i) {
+                output += npc.incrementFaceElasticity(i);
+              },
+              max: 7,
+              min: 0
+            };
+            break;
+          case 'mouthplasticity':
+            var statObj = {
+              get: function() {
+                return npc.getFacePlasticity().getValue();
+              },
+              set: function(i) {
+                output += npc.setFacePlasticity(i);
+              },
+              increment: function(i) {
+                output += npc.incrementFacePlasticity(i);
+              },
+              max: 7,
+              min: 0
+            };
+            break;
+          case 'mouthwetness':
+            var statObj = {
+              get: function() {
+                return npc.getFaceWetness().getValue();
+              },
+              set: function(i) {
+                output += npc.setFaceWetness(i);
+              },
+              increment: function(i) {
+                output += npc.incrementFaceWetness(i);
+              },
+              max: 7,
+              min: 0
+            };
+            break;
           case 'asssize':
             var statObj = {
               get: function() {
