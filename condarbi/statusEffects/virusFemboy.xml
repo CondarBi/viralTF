@@ -204,6 +204,24 @@
                 min: 0
               };
               break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasFaceOrificeModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addFaceOrificeModifier(stat);
+                  } else {
+                    output += npc.removeFaceOrificeModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
           break;
         case 'ass':
           switch(stat.toString().toLowerCase().replace(/_/g, "")) {
@@ -228,6 +246,7 @@
       statObj.increment(1);
       return output;
     }]
+    [# transform(npc, "mouth", ORIFICE_MODIFIER_RIBBED, 1, 2, 3, 4, 5)]
     [# transform(npc, "ass", "assSize", 1, 2, 3, 4, 5)]
     [# transform(npc, "attributes", "corruption", 1, 2, 3, 4, 5)]
     [# transform(npc, "fetish", FETISH_ANAL_GIVING, 1, 2, 3, 4, 5)]
