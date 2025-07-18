@@ -222,6 +222,7 @@
                 max: 1,
                 min: 0
               };
+          };
           break;
         case 'ass':
           switch(stat.toString().toLowerCase().replace(/_/g, "")) {
