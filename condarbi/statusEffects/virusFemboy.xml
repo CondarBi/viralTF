@@ -129,7 +129,7 @@
                 min: 0
               };
               break;
-            case 'mouthcapacity':
+            case 'capacity':
               var statObj = {
                 get: function() {
                   return npc.getFaceRawCapacityValue();
@@ -144,7 +144,7 @@
                 min: 0
               };
               break;
-            case 'mouthdepth':
+            case 'depth':
               var statObj = {
                 get: function() {
                   return npc.getFaceDepth().getValue();
@@ -159,7 +159,7 @@
                 min: 0
               };
               break;
-            case 'mouthelasticity':
+            case 'elasticity':
               var statObj = {
                 get: function() {
                   return npc.getFaceElasticity().getValue();
@@ -174,7 +174,7 @@
                 min: 0
               };
               break;
-            case 'mouthplasticity':
+            case 'plasticity':
               var statObj = {
                 get: function() {
                   return npc.getFacePlasticity().getValue();
@@ -189,7 +189,7 @@
                 min: 0
               };
               break;
-            case 'mouthwetness':
+            case 'wetness':
               var statObj = {
                 get: function() {
                   return npc.getFaceWetness().getValue();
