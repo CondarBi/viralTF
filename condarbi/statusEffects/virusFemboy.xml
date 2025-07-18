@@ -38,26 +38,83 @@
     [## npc.addStatusEffect(SE_condarbi_virusFemboy, 86400)]
     [## function transform(npc, stat, target, lowerBound, upperBound, desiredTime, onInfection) {
       var output = "";
-      switch(stat.toLowerCase().replace(/_/g, "")) {
-        case 'asssize':
-          var statObj = {
-            get : function() {
-              return npc.getAssSize().getValue();
-            },
-            set : function(i) {
-              output += npc.setAssSize(i);
-            },
-            increment : function(i) {
-              output += npc.incrementAssSize(i);
-            },
-            max : 7,
-            min: 0
-          };
-          break;
+      if (typeof(stat) == "string") {
+        switch(stat.toLowerCase().replace(/_/g, "")) {
+          case 'corruption':
+            var statObj = {
+              get : function() {
+                return Math.round(npc.getAttributeValue(ATTRIBUTE_MAJOR_CORRUPTION));
+              },
+              set : function(i) {
+                output += npc.setAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
+              },
+              increment : function(i) {
+                output += npc.incrementAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
+              },
+              max: 100,
+              min: 0
+            };
+            break;
+          case 'asssize':
+            var statObj = {
+              get : function() {
+                return npc.getAssSize().getValue();
+              },
+              set : function(i) {
+                output += npc.setAssSize(i);
+              },
+              increment : function(i) {
+                output += npc.incrementAssSize(i);
+              },
+              max : 7,
+              min: 0
+            };
+            break;
+        }
+      } else {
+        var statObj = {
+          get : function() {
+            if (npc.hasFetish(stat)) {
+              return 5;
+            } else {
+              return npc.getFetishDesire(stat).getValue();
+            }
+          },
+          set : function(i) {
+            switch(i) {
+              case 5:
+                npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE);
+                output += npc.addFetish(stat, true);
+                break;
+              case 4:
+                output += npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE, true);
+                break;
+              case 3:
+                output += npc.setFetishDesire(stat, FETISH_DESIRE_THREE_LIKE, true);
+                break;
+              case 2:
+                output += npc.setFetishDesire(stat, FETISH_DESIRE_TWO_NEUTRAL, true);
+                break;
+              case 1:
+                output += npc.setFetishDesire(stat, FETISH_DESIRE_ONE_DISLIKE, true);
+                break;
+              case 0:
+                output += npc.setFetishDesire(stat, FETISH_DESIRE_ZERO_HATE, true);
+                break;
+            }
+          },
+          increment : function(i) {
+            this.set(this.get() + i);
+          },
+          max: 5,
+          min: 0
+        }
       }
       statObj.increment(1);
       return output;
     }]
     [# transform(npc, "assSize", 1, 2, 3, 4, 5)]
+    [# transform(npc, "corruption", 1, 2, 3, 4, 5)]
+    [# transform(npc, FETISH_ANAL_GIVING, 1, 2, 3, 4, 5)]
   ]]></applyPostRemovalEffect>
 </statusEffect>
