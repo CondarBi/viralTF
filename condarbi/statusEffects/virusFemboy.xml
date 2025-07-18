@@ -411,6 +411,114 @@
                 min: 0
               };
               break;
+            case 'hipsize':
+              var statObj = {
+                get: function() {
+                  return npc.getHipSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setHipSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementHipSize(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'capacity':
+              var statObj = {
+                get: function() {
+                  return npc.getAssRawCapacityValue();
+                },
+                set: function(i) {
+                  output += npc.setAssCapacity(i, false);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssCapacity(i, false);
+                },
+                max: 25,
+                min: 0
+              };
+              break;
+            case 'depth':
+              var statObj = {
+                get: function() {
+                  return npc.getAssDepth().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssDepth(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssDepth(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'elasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getAssElasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssElasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssElasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'plasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getAssPlasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssPlasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssPlasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'wetness':
+              var statObj = {
+                get: function() {
+                  return npc.getAssWetness().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssWetness(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssWetness(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasAssOrificeModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addAssOrificeModifier(stat);
+                  } else {
+                    output += npc.removeAssOrificeModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
           break;
           }
       }
