@@ -36,190 +36,200 @@
   <applyRemovalEffect/>
   <applyPostRemovalEffect><![CDATA[
     [## npc.addStatusEffect(SE_condarbi_virusFemboy, 86400)]
-    [## function transform(npc, stat, target, lowerBound, upperBound, desiredTime, onInfection) {
+    [## function transform(npc, area, stat, target, lowerBound, upperBound, desiredTime, onInfection) {
       var output = "";
-      if (typeof(stat) == "string") {
-        switch(stat.toLowerCase().replace(/_/g, "")) {
-          case 'corruption':
-            var statObj = {
-              get: function() {
-                return Math.round(npc.getAttributeValue(ATTRIBUTE_MAJOR_CORRUPTION));
-              },
-              set: function(i) {
-                output += npc.setAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
-              },
-              increment: function(i) {
-                output += npc.incrementAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
-              },
-              max: 100,
-              min: 0
-            };
-            break;
-          case 'lipsize':
-            var statObj = {
-              get: function() {
-                return npc.getLipSizeValue();
-              },
-              set: function(i) {
-                output += npc.setLipSize(i);
-              },
-              increment: function(i) {
-                output += npc.incrementLipSize(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-          case 'tonguelength':
-            var statObj = {
-              get: function() {
-                return npc.getTongueLengthValue();
-              },
-              set: function(i) {
-                output += npc.setTongueLength(i);
-              },
-              increment: function(i) {
-                output += npc.incrementTongueLength(i);
-              },
-              max: 60,
-              min: 0
-            };
-            break;
-          case 'mouthcapacity':
-            var statObj = {
-              get: function() {
-                return npc.getFaceRawCapacityValue();
-              },
-              set: function(i) {
-                output += npc.setFaceCapacity(i, false);
-              },
-              increment: function(i) {
-                output += npc.incrementFaceCapacity(i, false);
-              },
-              max: 25,
-              min: 0
-            };
-            break;
-          case 'mouthdepth':
-            var statObj = {
-              get: function() {
-                return npc.getFaceDepth().getValue();
-              },
-              set: function(i) {
-                output += npc.setFaceDepth(i);
-              },
-              increment: function(i) {
-                output += npc.incrementFaceDepth(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-          case 'mouthelasticity':
-            var statObj = {
-              get: function() {
-                return npc.getFaceElasticity().getValue();
-              },
-              set: function(i) {
-                output += npc.setFaceElasticity(i);
-              },
-              increment: function(i) {
-                output += npc.incrementFaceElasticity(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-          case 'mouthplasticity':
-            var statObj = {
-              get: function() {
-                return npc.getFacePlasticity().getValue();
-              },
-              set: function(i) {
-                output += npc.setFacePlasticity(i);
-              },
-              increment: function(i) {
-                output += npc.incrementFacePlasticity(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-          case 'mouthwetness':
-            var statObj = {
-              get: function() {
-                return npc.getFaceWetness().getValue();
-              },
-              set: function(i) {
-                output += npc.setFaceWetness(i);
-              },
-              increment: function(i) {
-                output += npc.incrementFaceWetness(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-          case 'asssize':
-            var statObj = {
-              get: function() {
-                return npc.getAssSize().getValue();
-              },
-              set: function(i) {
-                output += npc.setAssSize(i);
-              },
-              increment: function(i) {
-                output += npc.incrementAssSize(i);
-              },
-              max: 7,
-              min: 0
-            };
-            break;
-        }
-      } else {
-        var statObj = {
-          get: function() {
-            if (npc.hasFetish(stat)) {
-              return 5;
-            } else {
-              return npc.getFetishDesire(stat).getValue();
-            }
-          },
-          set: function(i) {
-            switch(i) {
-              case 5:
-                npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE);
-                output += npc.addFetish(stat, true);
-                break;
-              case 4:
-                output += npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE, true);
-                break;
-              case 3:
-                output += npc.setFetishDesire(stat, FETISH_DESIRE_THREE_LIKE, true);
-                break;
-              case 2:
-                output += npc.setFetishDesire(stat, FETISH_DESIRE_TWO_NEUTRAL, true);
-                break;
-              case 1:
-                output += npc.setFetishDesire(stat, FETISH_DESIRE_ONE_DISLIKE, true);
-                break;
-              case 0:
-                output += npc.setFetishDesire(stat, FETISH_DESIRE_ZERO_HATE, true);
-                break;
-            }
-          },
-          increment: function(i) {
-            this.set(this.get() + i);
-          },
-          max: 5,
-          min: 0
-        }
+      switch(area.toLowerCase()) {
+        case 'attributes':
+          switch(stat.toLowerCase().replace(/_/g, "")) {
+            case 'corruption':
+              var statObj = {
+                get: function() {
+                  return Math.round(npc.getAttributeValue(ATTRIBUTE_MAJOR_CORRUPTION));
+                },
+                set: function(i) {
+                  output += npc.setAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAttribute(ATTRIBUTE_MAJOR_CORRUPTION, i);
+                },
+                max: 100,
+                min: 0
+              };
+              break;
+          };
+          break;
+        case 'fetish':
+          var statObj = {
+            get: function() {
+              if (npc.hasFetish(stat)) {
+                return 5;
+              } else {
+                return npc.getFetishDesire(stat).getValue();
+              }
+            },
+            set: function(i) {
+              switch(i) {
+                case 5:
+                  npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE);
+                  output += npc.addFetish(stat, true);
+                  break;
+                case 4:
+                  output += npc.setFetishDesire(stat, FETISH_DESIRE_FOUR_LOVE, true);
+                  break;
+                case 3:
+                  output += npc.setFetishDesire(stat, FETISH_DESIRE_THREE_LIKE, true);
+                  break;
+                case 2:
+                  output += npc.setFetishDesire(stat, FETISH_DESIRE_TWO_NEUTRAL, true);
+                  break;
+                case 1:
+                  output += npc.setFetishDesire(stat, FETISH_DESIRE_ONE_DISLIKE, true);
+                  break;
+                case 0:
+                  output += npc.setFetishDesire(stat, FETISH_DESIRE_ZERO_HATE, true);
+                  break;
+              }
+            },
+            increment: function(i) {
+              this.set(this.get() + i);
+            },
+            max: 5,
+            min: 0
+          };
+          break;
+        case 'mouth':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'lipsize':
+              var statObj = {
+                get: function() {
+                  return npc.getLipSizeValue();
+                },
+                set: function(i) {
+                  output += npc.setLipSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementLipSize(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'tonguelength':
+              var statObj = {
+                get: function() {
+                  return npc.getTongueLengthValue();
+                },
+                set: function(i) {
+                  output += npc.setTongueLength(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementTongueLength(i);
+                },
+                max: 60,
+                min: 0
+              };
+              break;
+            case 'mouthcapacity':
+              var statObj = {
+                get: function() {
+                  return npc.getFaceRawCapacityValue();
+                },
+                set: function(i) {
+                  output += npc.setFaceCapacity(i, false);
+                },
+                increment: function(i) {
+                  output += npc.incrementFaceCapacity(i, false);
+                },
+                max: 25,
+                min: 0
+              };
+              break;
+            case 'mouthdepth':
+              var statObj = {
+                get: function() {
+                  return npc.getFaceDepth().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFaceDepth(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFaceDepth(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'mouthelasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getFaceElasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFaceElasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFaceElasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'mouthplasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getFacePlasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFacePlasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFacePlasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'mouthwetness':
+              var statObj = {
+                get: function() {
+                  return npc.getFaceWetness().getValue();
+                },
+                set: function(i) {
+                  output += npc.setFaceWetness(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementFaceWetness(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+          break;
+        case 'ass':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'asssize':
+              var statObj = {
+                get: function() {
+                  return npc.getAssSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAssSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAssSize(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+          break;
+          }
       }
       statObj.increment(1);
       return output;
     }]
-    [# transform(npc, "assSize", 1, 2, 3, 4, 5)]
-    [# transform(npc, "corruption", 1, 2, 3, 4, 5)]
-    [# transform(npc, FETISH_ANAL_GIVING, 1, 2, 3, 4, 5)]
+    [# transform(npc, "ass", "assSize", 1, 2, 3, 4, 5)]
+    [# transform(npc, "attributes", "corruption", 1, 2, 3, 4, 5)]
+    [# transform(npc, "fetish", FETISH_ANAL_GIVING, 1, 2, 3, 4, 5)]
   ]]></applyPostRemovalEffect>
 </statusEffect>
