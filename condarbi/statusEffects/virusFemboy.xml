@@ -545,6 +545,7 @@
           };
           break;
         case 'breasts':
+        case 'breast':
           switch(stat.toString().toLowerCase().replace(/_/g, "")) {
             case 'size':
               var statObj = {
@@ -677,6 +678,7 @@
     }]
     [# transform(npc, "mouth", ORIFICE_MODIFIER_RIBBED, 1, 2, 3, 4, 5)]
     [# transform(npc, "ass", "assSize", 1, 2, 3, 4, 5)]
+    [# transform(npc, "breast", "Size", 1, 2, 3, 4, 5)]
     [# transform(npc, "attributes", "corruption", 1, 2, 3, 4, 5)]
     [# transform(npc, "fetish", FETISH_ANAL_GIVING, 1, 2, 3, 4, 5)]
   ]]></applyPostRemovalEffect>
