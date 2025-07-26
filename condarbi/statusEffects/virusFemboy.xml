@@ -672,6 +672,136 @@
               };
           };
           break;
+        case 'breastscrotch':
+        case 'breastcrotch':
+        case 'crotchbreast':
+        case 'crotchbreasts':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'size':
+              var statObj = {
+                get: function() {
+                  return npc.getBreastCrotchRawSizeValue();
+                },
+                set: function(i) {
+                  output += npc.setBreastCrotchSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementBreastCrotchSize(i);
+                },
+                max: 91,
+                min: 0
+              };
+              break;
+            case 'nipplesize':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleCrotchSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCrotchSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCrotchSize(i);
+                },
+                max: 4,
+                min: 0
+              };
+              break;
+            case 'areolaesize':
+              var statObj = {
+                get: function() {
+                  return npc.getAreolaeCrotchSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAreolaeCrotchSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAreolaeCrotchSize(i);
+                },
+                max: 4,
+                min: 0
+              };
+              break;
+            case 'capacity':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleCrotchRawCapacityValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCrotchCapacity(i, false);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCrotchCapacity(i, false);
+                },
+                max: 25,
+                min: 0
+              };
+              break;
+            case 'depth':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleCrotchDepth().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCrotchDepth(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCrotchDepth(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'elasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleCrotchElasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCrotchElasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCrotchElasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'plasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleCrotchPlasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCrotchPlasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCrotchPlasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasNippleCrotchOrificeModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addNippleCrotchOrificeModifier(stat);
+                  } else {
+                    output += npc.removeNippleCrotchOrificeModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
+          };
+          break;
       }
       statObj.increment(1);
       return output;
