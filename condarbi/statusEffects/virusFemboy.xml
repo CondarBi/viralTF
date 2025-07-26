@@ -114,21 +114,6 @@
                 min: 0
               };
               break;
-            case 'tonguelength':
-              var statObj = {
-                get: function() {
-                  return npc.getTongueLengthValue();
-                },
-                set: function(i) {
-                  output += npc.setTongueLength(i);
-                },
-                increment: function(i) {
-                  output += npc.incrementTongueLength(i);
-                },
-                max: 60,
-                min: 0
-              };
-              break;
             case 'capacity':
               var statObj = {
                 get: function() {
@@ -222,6 +207,44 @@
                 max: 1,
                 min: 0
               };
+          };
+          break;
+        case 'tongue':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'length':
+              var statObj = {
+                get: function() {
+                  return npc.getTongueLengthValue();
+                },
+                set: function(i) {
+                  output += npc.setTongueLength(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementTongueLength(i);
+                },
+                max: 60,
+                min: 0
+              };
+              break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasTongueModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addTongueModifier(stat);
+                  } else {
+                    output += npc.removeTongueModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
+              break;
           };
           break;
         case 'core':
