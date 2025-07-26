@@ -351,8 +351,8 @@
                 increment: function(i) {
                   output += npc.incrementHairLength(i);
                 },
-                max: ,
-                min: 
+                max: 350,
+                min: 0
               };
               break;
             case 'facial':
