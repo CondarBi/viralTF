@@ -542,8 +542,135 @@
                 max: 1,
                 min: 0
               };
+          };
           break;
-          }
+        case 'breasts':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'size':
+              var statObj = {
+                get: function() {
+                  return npc.getBreastRawSizeValue();
+                },
+                set: function(i) {
+                  output += npc.setBreastSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementBreastSize(i);
+                },
+                max: 91,
+                min: 0
+              };
+              break;
+            case 'nipplesize':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleSize(i);
+                },
+                max: 4,
+                min: 0
+              };
+              break;
+            case 'areolaesize':
+              var statObj = {
+                get: function() {
+                  return npc.getAreolaeSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setAreolaeSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementAreolaeSize(i);
+                },
+                max: 4,
+                min: 0
+              };
+              break;
+            case 'capacity':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleRawCapacityValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleCapacity(i, false);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleCapacity(i, false);
+                },
+                max: 25,
+                min: 0
+              };
+              break;
+            case 'depth':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleDepth().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleDepth(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleDepth(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'elasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getNippleElasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNippleElasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNippleElasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'plasticity':
+              var statObj = {
+                get: function() {
+                  return npc.getNipplePlasticity().getValue();
+                },
+                set: function(i) {
+                  output += npc.setNipplePlasticity(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementNipplePlasticity(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasNippleOrificeModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addNippleOrificeModifier(stat);
+                  } else {
+                    output += npc.removeNippleOrificeModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
+          };
+          break;
       }
       statObj.increment(1);
       return output;
