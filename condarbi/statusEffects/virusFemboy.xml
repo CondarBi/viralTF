@@ -802,6 +802,98 @@
               };
           };
           break;
+        case 'dick':
+        case 'penis':
+          switch(stat.toString().toLowerCase().replace(/_/g, "")) {
+            case 'has':
+            case 'exists':
+              var statObj = {
+                get: function() {
+                  return npc.hasPenisIgnoreDildo() ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.setPenisType(npc.getFleshSubspecies().getRace().getRacialBody().getPenisType());
+                  } else {
+                    output += npc.setPenisType(PENIS_TYPE_NONE);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
+              break;
+            case 'length':
+            case 'size':
+              var statObj = {
+                get: function() {
+                  return npc.getPenisRawSizeValue();
+                },
+                set: function(i) {
+                  output += npc.setPenisSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementPenisSize(i);
+                },
+                max: 100,
+                min: 0
+              };
+              break;
+            case 'girth':
+              var statObj = {
+                get: function() {
+                  return npc.getPenisRawGirthValue();
+                },
+                set: function(i) {
+                  output += npc.setPenisGirth(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementPenisGirth(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            case 'ballsize':
+            case 'ballssize':
+            case 'testiclesize':
+            case 'testiclessize':
+              var statObj = {
+                get: function() {
+                  return npc.getTesticleSize().getValue();
+                },
+                set: function(i) {
+                  output += npc.setTesticleSize(i);
+                },
+                increment: function(i) {
+                  output += npc.incrementTesticleSize(i);
+                },
+                max: 7,
+                min: 0
+              };
+              break;
+            default:
+              var statObj = {
+                get: function() {
+                  return npc.hasPenisModifier(stat) ? 1 : 0;
+                },
+                set: function(i) {
+                  if (i > 0) {
+                    output += npc.addPenisModifier(stat);
+                  } else {
+                    output += npc.removePenisModifier(stat);
+                  }
+                },
+                increment: function(i) {
+                  this.set(i + this.get());
+                },
+                max: 1,
+                min: 0
+              };
+          };
+          break;
       }
       statObj.increment(1);
       return output;
